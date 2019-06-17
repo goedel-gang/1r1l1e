@@ -3,7 +3,7 @@
 SHELL = bash
 
 default:
-	make -B data.dec
+	@make -B data.dec
 
 data.dat: make_data.py
 	python make_data.py > $@.tmp
@@ -15,5 +15,5 @@ data.rle: data.dat
 
 data.dec: data.rle
 	python rle.py -d < $< > $@
-	echo "$$(echo "scale=10; 100 * $$(wc -c data.rle | cut -d' ' -f1) / $$(wc -c data.dat | cut -d' ' -f1)" | bc)%"
+	@echo "$$(echo "scale=10; 100 * $$(wc -c data.rle | cut -d' ' -f1) / $$(wc -c data.dat | cut -d' ' -f1)" | bc)% compression"
 	diff -s data.dec data.dat
