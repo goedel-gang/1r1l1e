@@ -1,7 +1,7 @@
-import sys as s
+import sys
 import itertools as t
-x=s.stdin.buffer.read()
-o=s.stdout
+x=sys.stdin.buffer.read()
+o=sys.stdout
 if '-d'in s.argv:
  for n,c in zip(*[iter(x)]*2):
   o.write(chr(c)*n)
