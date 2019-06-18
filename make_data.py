@@ -31,8 +31,9 @@ def make_random(n):
             if i + num >= n:
                 break
         i += num
-        print(f"\r[{'-' * int(60 * i / n):<60}] ({i / n:4.0%})", end="",
-                file=sys.stderr, flush=True)
+        print("\r[{:<60}] ({:4.0%})".format(
+            '-' * int(60 * i / n), i / n),
+                end="", file=sys.stderr, flush=True)
         sys.stdout.write(char * num)
     print(file=sys.stderr)
 
