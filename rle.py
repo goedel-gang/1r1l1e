@@ -2,7 +2,7 @@ from sys import*
 from itertools import*
 x=stdin.buffer.read()
 o=stdout
-if '-d'in argv:
+if'-d'in argv:
  for n,c in zip(*[iter(x)]*2):
   o.write(chr(c)*n)
 else:
