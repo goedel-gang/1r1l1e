@@ -1,8 +1,8 @@
-.PHONY: default
+.PHONY: default integrity
 
 SHELL = bash
 
-default:
+default: integrity
 	@make -B data.dec
 
 data.dat: make_data.py
@@ -12,6 +12,10 @@ data.dat: make_data.py
 
 data.rle: data.dat
 	python rle.py < $< > $@
+
+# https://stackoverflow.com/questions/34943632/linux-check-if-there-is-an-empty-line-at-the-end-of-a-file
+integrity:
+	@if [ -z "$$(tail -c 1 rle.py)" ]; then >&2 echo "Trailing newline alert!"; exit 1; fi
 
 data.dec: data.rle
 	python rle.py -d < $< > $@
