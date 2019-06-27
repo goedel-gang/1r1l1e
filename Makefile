@@ -16,6 +16,8 @@ data.rle: data.dat
 # https://stackoverflow.com/questions/34943632/linux-check-if-there-is-an-empty-line-at-the-end-of-a-file
 integrity:
 	@if [ -z "$$(tail -c 1 rle.py)" ]; then >&2 echo "Trailing newline alert!"; exit 1; fi
+	@if [ "$$(wc -c < rle.py)" -gt "$$(git show HEAD:rle.py | wc -c)" ]; then >&2 echo "A tree just died"; exit 1; fi
+	@if [ "$$(wc -c < rle.py)" = "$$(git show HEAD:rle.py | wc -c)" ]; then >&2 echo "No savings"; fi
 
 data.dec: data.rle
 	python rle.py -d < $< > $@
